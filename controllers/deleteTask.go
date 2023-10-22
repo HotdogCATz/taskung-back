@@ -10,14 +10,20 @@ import (
 )
 
 func DeleteTaskByID(c *gin.Context) {
-	// get the posts
-	// models call one element
 	var modelTask models.TaskModel
-	taskId := c.Param("id")
-	if err := inits.DB.Where("id = ?", c.Param("id")).First(&modelTask).Error; err != nil {
+	projectID := c.Param("project_id")
+
+	taskID := c.Param("id")
+
+	if err := inits.DB.Where("project_id = ?", projectID).Where("id = ?", taskID).First(&modelTask).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Maybe the task has already been deleted!"})
 		return
 	}
-	inits.DB.Delete(&modelTask, taskId)
-	c.JSON(http.StatusOK, "deleted: task id "+taskId)
+
+	if err := inits.DB.Delete(&modelTask).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete task"})
+		return
+	}
+
+	c.JSON(http.StatusOK, "Deleted task with ID: "+taskID)
 }

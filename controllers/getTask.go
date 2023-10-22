@@ -19,7 +19,7 @@ import (
 //	}
 func GetTask(c *gin.Context) {
 	// Get the project ID from the URL parameter
-	projectID := c.Param("id")
+	projectID := c.Param("project_id")
 
 	var tasks []models.TaskModel
 
@@ -47,11 +47,12 @@ func GetTask(c *gin.Context) {
 func GetTaskByID(c *gin.Context) {
 	// Get the task ID from the URL parameter
 	taskID := c.Param("id")
+	projectID := c.Param("project_id")
 
 	var task models.TaskModel
 
 	// Find the task by ID
-	if err := inits.DB.Where("id = ?", taskID).First(&task).Error; err != nil {
+	if err := inits.DB.Where("project_id = ?", projectID).Where("id = ?", taskID).First(&task).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Task not found!"})
 		return
 	}

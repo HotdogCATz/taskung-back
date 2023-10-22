@@ -48,7 +48,7 @@ func GetProject(c *gin.Context) {
 //	}
 func GetProjectByID(c *gin.Context) {
 	// Get the project ID from the URL parameter
-	projectID := c.Param("id")
+	projectID := c.Param("project_id")
 
 	// Find the project by ID
 	var project models.Project

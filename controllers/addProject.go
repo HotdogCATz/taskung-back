@@ -23,7 +23,7 @@ func AddProject(c *gin.Context) {
 		return
 	}
 
-	// Create a new task record in the database
+	// Create a project in the database
 	if err := inits.DB.Create(&newProject).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create Project"})
 		return

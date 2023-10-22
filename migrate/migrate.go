@@ -11,6 +11,7 @@ func init() {
 }
 
 func main() {
+	inits.DB.AutoMigrate(&models.User{})
 	inits.DB.AutoMigrate(&models.TaskModel{})
 	inits.DB.AutoMigrate(&models.Project{})
 }

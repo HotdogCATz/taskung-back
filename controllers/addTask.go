@@ -23,7 +23,7 @@ func AddTask(c *gin.Context) {
 		return
 	}
 
-	projectID := c.Param("id") // Get the project ID from the URL parameter
+	projectID := c.Param("project_id") // Get the project ID from the URL parameter
 
 	var project models.Project
 

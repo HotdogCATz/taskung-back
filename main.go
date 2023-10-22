@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"taskung.com/test/m/v2/inits"
 	"taskung.com/test/m/v2/routes"
@@ -23,5 +24,6 @@ func main() {
 	// 		"message": "pong",
 	// 	})
 	// })
+	r.Use(cors.Default())
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
