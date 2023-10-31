@@ -1,4 +1,4 @@
-package controllers
+package taskControllers
 
 import (
 	"net/http"
@@ -34,7 +34,7 @@ func AddTask(c *gin.Context) {
 	}
 
 	// Set the ProjectID for the new task
-	newTask.ProjectID = project.ID
+	newTask.ProjectTaskID = project.ID
 
 	// Create a new task record in the database
 	if err := inits.DB.Create(&newTask).Error; err != nil {

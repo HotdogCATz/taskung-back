@@ -1,4 +1,4 @@
-package controllers
+package userControllers
 
 import (
 	"net/http"
@@ -33,9 +33,6 @@ func Register(c *gin.Context) {
 
 	// Save the user to the database
 	inits.DB.Create(&user)
-
-	// Generate JWT token
-	// token := generateToken(user.ID)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status":   "ok",

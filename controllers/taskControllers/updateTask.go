@@ -1,4 +1,4 @@
-package controllers
+package taskControllers
 
 import (
 	"net/http"
@@ -51,10 +51,10 @@ func UpdateTaskByID(c *gin.Context) {
 	var updateTask models.TaskModel
 
 	// Get the project ID from the URL parameter
-	projectID := c.Param("project_id")
+	// projectID := c.Param("project_id")
 
 	// Get the task ID from the URL parameter
-	taskID := c.Param("id")
+	taskID := c.Param("task_id")
 
 	// Manually Bind Json the JSON data into the newTask struct
 	if err := c.ShouldBindJSON(&modelTask); err != nil {
@@ -69,7 +69,7 @@ func UpdateTaskByID(c *gin.Context) {
 	}
 
 	// Update a task record in the database
-	if err := inits.DB.Where("project_id = ?", projectID).Where("id = ?", taskID).First(&updateTask).Error; err != nil {
+	if err := inits.DB.Where("id = ?", taskID).First(&updateTask).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update task"})
 		return
 	}

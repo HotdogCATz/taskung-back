@@ -1,4 +1,4 @@
-package controllers
+package taskControllers
 
 import (
 	// "fmt"
@@ -11,11 +11,10 @@ import (
 
 func DeleteTaskByID(c *gin.Context) {
 	var modelTask models.TaskModel
-	projectID := c.Param("project_id")
+	// projectID := c.Param("project_id")
+	taskID := c.Param("task_id")
 
-	taskID := c.Param("id")
-
-	if err := inits.DB.Where("project_id = ?", projectID).Where("id = ?", taskID).First(&modelTask).Error; err != nil {
+	if err := inits.DB.Where("id = ?", taskID).First(&modelTask).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Maybe the task has already been deleted!"})
 		return
 	}

@@ -1,4 +1,4 @@
-package controllers
+package projectControllers
 
 import (
 	"net/http"

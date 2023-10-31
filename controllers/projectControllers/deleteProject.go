@@ -1,4 +1,4 @@
-package controllers
+package projectControllers
 
 import (
 	// "fmt"
@@ -32,7 +32,7 @@ func DeleteProjectByID(c *gin.Context) {
 	}
 
 	// Delete associated tasks
-	if err := tx.Where("project_id = ?", projectID).Delete(&models.TaskModel{}).Error; err != nil {
+	if err := tx.Where("project_task_id = ?", projectID).Delete(&models.TaskModel{}).Error; err != nil {
 		tx.Rollback()
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete tasks"})
 		return
