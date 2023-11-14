@@ -30,7 +30,6 @@ func Register(c *gin.Context) {
 		return
 	}
 	user.Password = string(hashedPassword)
-
 	// Save the user to the database
 	inits.DB.Create(&user)
 
