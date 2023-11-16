@@ -7,7 +7,8 @@ type User struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
 	Avatar   string
-	Projects []Project `gorm:"many2many:user_projects;"` // Projects associated with this user
+	Projects []Project   `gorm:"many2many:user_projects;"` // Projects associated with this user
+	UserTask []TaskModel `gorm:"foreignKey:UserTaskID"`
 }
 type Project struct {
 	gorm.Model
@@ -23,6 +24,7 @@ type TaskModel struct {
 	Description   string         `json:"description"`
 	ProjectTaskID uint           `json:"project_id"`
 	SubTask       []SubTaskModel `gorm:"foreignKey:TaskSubTaskID"`
+	UserTaskID    uint           `json:"user_task_id" gorm:"default:null"`
 }
 
 type SubTaskModel struct {

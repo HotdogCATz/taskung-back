@@ -40,6 +40,9 @@ func UpdateTask(c *gin.Context) {
 	if modelTask.Description != "" {
 		updateTask.Description = modelTask.Description
 	}
+	if modelTask.UserTaskID != 0 {
+		updateTask.UserTaskID = modelTask.UserTaskID
+	}
 
 	// Save the updated task
 	inits.DB.Save(&updateTask)
@@ -83,6 +86,9 @@ func UpdateTaskByID(c *gin.Context) {
 	}
 	if modelTask.Description != "" {
 		updateTask.Description = modelTask.Description
+	}
+	if modelTask.UserTaskID != 0 {
+		updateTask.UserTaskID = modelTask.UserTaskID
 	}
 
 	// Save the updated task

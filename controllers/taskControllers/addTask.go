@@ -33,12 +33,22 @@ func AddTask(c *gin.Context) {
 		return
 	}
 
-	// Set the ProjectID for the new task
+	// Get the user ID from the URL parameter
+	// userID := c.Param("user_task_id")
+	// Check if the user with the given ID exists
+	// var user models.User
+	// if err := inits.DB.Where("id = ?", userID).First(&user).Error; err != nil {
+	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "User not found!"})
+	// 	return
+	// }
+
+	// Set the ProjectID and UserTaskID for the new task
 	newTask.ProjectTaskID = project.ID
+	// newTask.UserTaskID = user.ID
 
 	// Create a new task record in the database
 	if err := inits.DB.Create(&newTask).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create task"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create task", "details": err.Error()})
 		return
 	} else {
 		c.JSON(http.StatusOK, gin.H{"message": "created new task!"})
