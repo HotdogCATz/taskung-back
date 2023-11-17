@@ -1,1 +1,1 @@
-web: ./taskung-back
+web: taskung-back
